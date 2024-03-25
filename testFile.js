@@ -1,25 +1,15 @@
-function getWeekNumberByDate(date) {
-  const year = date.getFullYear();
-  const month = date.getMonth();
-  const day = date.getDate();
+function getQuarter(date) {
+  const month = date.getUTCMonth();
 
-  const firstDayOfYear = new Date(Date.UTC(year, 0, 1));
-
-  const targetDate = new Date(Date.UTC(year, month, day));
-
-  let weekNumber = 1;
-
-  const currentDate = new Date(firstDayOfYear);
-  currentDate.setUTCDate(currentDate.getUTCDate() + 1);
-
-  while (currentDate.getTime() <= targetDate.getTime()) {
-    if (currentDate.getUTCDay() === 1) {
-      weekNumber += 1;
-    }
-    currentDate.setUTCDate(currentDate.getUTCDate() + 1);
+  if (month >= 0 && month <= 2) {
+    return 1;
   }
-
-  return weekNumber;
+  if (month >= 3 && month <= 5) {
+    return 2;
+  }
+  if (month >= 6 && month <= 8) {
+    return 3;
+  }
+  return 4;
 }
-
-console.log(getWeekNumberByDate(new Date(2023, 1, 23)));
+console.log(getQuarter(new Date(2024, 10, 10)));
